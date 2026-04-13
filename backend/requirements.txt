@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+lightgbm
+pandas
+joblib
+torch
+torch-geometric
+scikit-learn
