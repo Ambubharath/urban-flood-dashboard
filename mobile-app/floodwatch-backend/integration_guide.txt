@@ -1,0 +1,57 @@
+
+🔗 Integration Guide for Flood Risk Prediction Model
+
+------------------------------------------------------
+Option 1: Use the API (Recommended)
+------------------------------------------------------
+
+The app can call the /predict endpoint via HTTP POST.
+
+Example (Python):
+------------------------------------------------------
+import requests
+response = requests.post("http://127.0.0.1:8000/predict", params={"place": "Kazhakkoottam", "rainfall_mm": 45.0})
+print(response.json())
+
+Example Response:
+------------------------------------------------------
+{
+  "place": "Kazhakkoottam",
+  "rainfall_mm": 45.0,
+  "predicted_risk_label": "High",
+  "probabilities": {"Low": 0.12, "Medium": 0.23, "High": 0.65}
+}
+
+------------------------------------------------------
+Option 2: Direct Integration (Advanced)
+------------------------------------------------------
+
+If you want to use the model directly in your code without running the API:
+
+import joblib, pandas as pd
+
+# Load model and mapping
+model = joblib.load("rain_risk_model.pkl")
+place_mapping = joblib.load("place_mapping.pkl")
+
+# Example input
+place = "Kazhakkoottam"
+rainfall_mm = 45.0
+
+# Convert place to code
+place_code = list(place_mapping.keys())[list(place_mapping.values()).index(place)]
+
+# Predict
+X = pd.DataFrame([[rainfall_mm, place_code]], columns=['rainfall_mm', 'place_code'])
+pred = model.predict(X)[0]
+proba = model.predict_proba(X)[0]
+
+print("Predicted risk:", pred)
+print("Probabilities:", proba)
+
+------------------------------------------------------
+Usage Notes
+------------------------------------------------------
+- Option 1 is recommended for deployment: just run the FastAPI server and let the app call /predict.
+- Option 2 is useful if you want the model embedded directly in another Python backend (no API required).
+- The LightGBM model was trained using rainfall (mm) and place as features to predict risk levels.

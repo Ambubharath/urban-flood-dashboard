@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "695214659311",
+    "project_id": "floodwatch-trivandrum",
+    "storage_bucket": "floodwatch-trivandrum.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:695214659311:android:8fcb94f99d49ca945aed1a",
+        "android_client_info": {
+          "package_name": "com.example.floodwatchapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0G72QpLBXBIZ2vjUgknWBnScp1B78enw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
